@@ -2,6 +2,21 @@
 
 ![Hardware hacking: Zcomax WA-2204A-TX](images/router.jpg)
 
+## Obsah
+- [Hardware hacking: Zcomax WA-2204A-TX](hardware-hacking-zcomax-wa-2204a-tx)
+  * [Úvod](#úvod)
+    + [Poznámky](#poznámky)
+  * [Sériová konzole](#sériová-konzole)
+    + [Boot log](#boot-log)
+  * [Průzkum systému](#průzkum-systému)
+  * [Skenování portů](#skenování-portů)
+    + [TCP sken](#tcp-sken)
+    + [UDP sken](#tcp-sken)
+  * [Webové rozhraní](#webové-rozhraní)
+  * [UPnP](#upnp)
+  * [NFS?](#nfs)
+  * [DNS](#dns)
+
 ## Úvod
 
 >Jedná se o multifunkční bezdrátový Accesspoint / Bridge / Router / Klient pro nasazení v pásmu 2,4 GHz dle standardu IEEE 802.11b/g.
@@ -19,7 +34,7 @@ Zdroj: <https://eshop.compos.cz/zcomax-wa-2204a-tx-wireless-802-11g-ap-client-ro
 * Pochopit principy a ověřit obecně platné postupy. PoC. 
 * A hlavně se také zabavit :) 
 
-##  Sériová konzole (UART)
+## Sériová konzole
 
 Po sejmutí plastového krytu vidíme desku plošných spojů. Piny pro sériovou konzoli nejsou nijak označeny, ani není vidět chatakteristiké seskupení 4 pinů do "hřebínku" (GND, TX, RX a Vcc). S identifikací pomohl tento odkaz: <https://www.mylms.cz/pitva-routeru-panwa2204a/>, kde autor rozebírá podobný router na kterém piny rozpoznal. Na "naší" desce nalezneme až podezřeře stejnou šestici pinů v pravé horním rohu:
 
