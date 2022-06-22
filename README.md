@@ -3,7 +3,7 @@
 ![Hardware hacking: Zcomax WA-2204A-TX](images/router.jpg)
 
 ## Obsah
-- [Hardware hacking: Zcomax WA-2204A-TX](hardware-hacking-zcomax-wa-2204a-tx)
+
   * [Úvod](#úvod)
     + [Poznámky](#poznámky)
   * [Sériová konzole](#sériová-konzole)
