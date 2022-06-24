@@ -217,7 +217,7 @@ Currently defined functions:
 
 ```
 
-Příliš toho není, ale některé se přeci jen hodí Zde například podrobnosti o systému a architektuře:.
+Příliš mnoho toho není, ale některé se přeci jen hodí. Zde například podrobnosti o systému a architektuře:.
 ```
 # busybox uname -a
 Linux (none) 2.4.18-MIPS-01.00 #79 Wed Apr 18 14:37:44 CST 2007 mips unknown
@@ -226,7 +226,7 @@ Linux (none) 2.4.18-MIPS-01.00 #79 Wed Apr 18 14:37:44 CST 2007 mips unknown
 ```
 Jak je vidět, příkazy jsou prolinkované, takže není před každý potřeba zadávat `busybox` a dostaneme stejný výstup.
 
-Spuštěné programy:
+Spuštěné procesy:
 ```
 # ps
   PID  Uid     VmSize Stat Command
@@ -269,7 +269,7 @@ udp        0      0 0.0.0.0:53              0.0.0.0:*
 udp        0      0 0.0.0.0:21212           0.0.0.0:*
 udp        0      0 0.0.0.0:1900            0.0.0.0:*
 ```
-k jednotlivým službám se ješzě vrátíme.
+k jednotlivým službám se ještě vrátíme.
 
 Obsah souboru `/etc/passwd`:
 ```
@@ -278,7 +278,7 @@ root:abSQTPcIskFGc:0:0:root:/:/bin/sh
 nobody:x:99:99:Nobody:/:
 
 ```
-je zde uloženo zašiforvané heslo k `root` účtu. Použitá šifra je s největší pravděpodobností DES. Vzhledem k tomu, že už máme root přístup a žádný jiný dostupný shell není k dispozici (telnet/ssh), považuji za zbytečné se pouštět do crackování.
+zde je uloženo zašiforvané heslo k `root` účtu. Použitá šifra je s největší pravděpodobností DES. Vzhledem k tomu, že už máme root přístup a žádný jiný přístup k shellu není k dispozici (telnet/ssh), považuji za zbytečné se pouštět do crackování.
 
 Bohužel není k dispozici příkaz `ls`
 ```
@@ -421,7 +421,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel:2.4.18-mips-01.00
 # Nmap done at Thu Jun 16 22:42:24 2022 -- 1 IP address (1 host up) scanned in 226.77 seconds
 
 ```
-Skenování probíhalo s klientem připojeným k LAN portu routeru. Na WAN rozhraní v defaultním nastavení nenaslouchá žádný program. Web management se musí explicitně povolit,
+Skenování probíhalo s klientem připojeným k LAN portu routeru. Na WAN rozhraní v defaultním nastavení nenaslouchá žádný program, web management se musí explicitně povolit,
 
 ### UDP sken
 
@@ -446,7 +446,7 @@ Nmap done: 1 IP address (1 host up) scanned in 1239.38 seconds
 
 ## Webové rozhraní
 
-Výchozí přihlašovací údaje jsou `admin` a prazdné heslo, takže o zabezpečení nemůže být ani řeč. Na portu `tcp/80` beží webový server GoAhead, bohužel se mi nepodařilo zjistit verzi pro případné hledání příslušného exploitu.
+Výchozí přihlašovací údaje jsou `admin` a prazdné heslo, takže o zabezpečení nemůže být ani řeč. Na portu `tcp/80` beží webový server GoAhead, bohužel se mi nepodařilo zjistit přesnou verzi, takže hledání exploitu bylo náhodné a žádný z vyzkoušených nefungoval.
 
 Bez zadání přihlašovacích údajů dostaneme suché "Unauthorized":
 ```                     
@@ -464,7 +464,7 @@ Content-Type: text/html
 
 ```
 
-A po zadání jména a hesla, například `curl -i -L -u "admin:<PASSWORD>" http://10.0.0.8`:
+A po zadání jména a hesla, například pomocí `curl -i -L -u "admin:<PASSWORD>" http://10.0.0.8`:
 ```
 HTTP/1.0 302 Redirect
 Server: GoAhead-Webs
@@ -529,11 +529,11 @@ CONTENT-TYPE: text/html
 <html><body><h1>404 Not Found</h1></body></html>   
 ```
 
-Ve složce upnp v tomto repu, jsou pak XML soubory které se podařilo enumerovat. Nicméně nejsou téměř k ničemu. K verzi serveru se nepodařilo zjistit žádnou zranitelnost.
+Ve složce `upnp` v tomto repu, jsou pak XML soubory které se podařilo enumerovat. Nicméně nejsou téměř k ničemu. K verzi serveru se nepodařilo zjistit žádnou zranitelnost.
 
 ## NFS?
 
-Router má otevřený port `udp/2049` které standardně patří službě pro přenos souborů NFS. Podle všeho ale implementace nebyla dokončena a není ani funkční: např. chybí soubor `/etc/exports` v routeru a nelze zjistit zadne sdilene slozky:
+Router má otevřený port `udp/2049` které standardně patří službě pro přenos souborů NFS. Podle všeho ale implementace nebyla dokončena a není tedy funkční: např. chybí soubor `/etc/exports` v routeru a nelze zjistit zadne sdilene slozky:
 ```
 showmount -e 10.0.0.8
 clnt_create: RPC: Unable to receive
@@ -541,4 +541,4 @@ clnt_create: RPC: Unable to receive
 
 ## DNS
 
-Portech `tcp/53` a `udp/53` patří NLnet Labs Name Server Daemon (NSD), což je klasický deamon pro DNS forwarding (<https://github.com/NLnetLabs/nsd>), bohužel opět, bez exploitu.
+Porty `tcp/53` a `udp/53` patří NLnet Labs Name Server Daemon (NSD), což je klasický deamon pro DNS forwarding (<https://github.com/NLnetLabs/nsd>), bohužel opět, bez exploitu.
